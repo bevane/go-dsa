@@ -36,3 +36,16 @@ func TestInsertionSort(t *testing.T) {
 		})
 	}
 }
+
+func TestMergeSort(t *testing.T) {
+	for _, test := range testCases {
+		t.Run(fmt.Sprintf("%v", test.input), func(t *testing.T) {
+			arr := make([]int, len(test.input))
+			copy(arr, test.input)
+			MergeSort(arr)
+			if !reflect.DeepEqual(arr, test.want) {
+				t.Errorf("got %v want %v", arr, test.want)
+			}
+		})
+	}
+}
