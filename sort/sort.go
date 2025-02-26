@@ -1,7 +1,5 @@
 package sort
 
-import "fmt"
-
 func InsertionSort(arr []int) {
 	for i := 1; i < len(arr); i++ {
 		j := i - 1
@@ -13,7 +11,6 @@ func InsertionSort(arr []int) {
 		}
 
 	}
-	fmt.Println("Sorted with insertion sort")
 }
 
 func MergeSort(arr []int) {
@@ -72,4 +69,39 @@ func merge(arr []int, low int, mid int, high int) {
 		j++
 		k++
 	}
+}
+
+func QuickSort(arr []int) {
+	quickSortR(arr, 0, len(arr)-1)
+}
+
+func quickSortR(arr []int, low int, high int) {
+	if low >= high {
+		return
+	}
+
+	pivot := arr[high]
+	// index denoting where left side ends (exclusive)
+	leftEnd := low
+
+	// iterate through all elements except for the pivot which is at high
+	for i := low; i < high; i++ {
+		// will move all the values less than pivot to the left
+		if arr[i] < pivot {
+			tmp := arr[i]
+			arr[i] = arr[leftEnd]
+			arr[leftEnd] = tmp
+			// if a swap was made then there is one more value
+			// added to left side, so increment leftEnd by one
+			leftEnd++
+		}
+	}
+
+	// move pivot in between right and left side
+	arr[high] = arr[leftEnd]
+	arr[leftEnd] = pivot
+
+	// sort left and right sides
+	quickSortR(arr, low, leftEnd-1)
+	quickSortR(arr, leftEnd+1, high)
 }
