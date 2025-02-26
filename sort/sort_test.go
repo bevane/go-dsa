@@ -62,3 +62,16 @@ func TestQuickSort(t *testing.T) {
 		})
 	}
 }
+
+func TestBucketSort(t *testing.T) {
+	for _, test := range testCases {
+		t.Run(fmt.Sprintf("%v", test.input), func(t *testing.T) {
+			arr := make([]int, len(test.input))
+			copy(arr, test.input)
+			BucketSort(arr, 1, 9)
+			if !reflect.DeepEqual(arr, test.want) {
+				t.Errorf("got %v want %v", arr, test.want)
+			}
+		})
+	}
+}

@@ -105,3 +105,27 @@ func quickSortR(arr []int, low int, high int) {
 	quickSortR(arr, low, leftEnd-1)
 	quickSortR(arr, leftEnd+1, high)
 }
+
+func BucketSort(arr []int, min int, max int) {
+	count := make([]int, max-min+1)
+	// add all values into their buckets
+
+	for _, v := range arr {
+		// for cases where the min is not equal to zero
+		// hence the first index in count should refer to min
+		// instead of zero
+		count[v-min]++
+	}
+
+	i := 0
+	// iterate over each index in count
+	for j := range count {
+		// iterate equal to value at index of count
+		for range count[j] {
+			// each index in count counts up from min instead of zero
+			// so add back min to the index
+			arr[i] = j + min
+			i++
+		}
+	}
+}
